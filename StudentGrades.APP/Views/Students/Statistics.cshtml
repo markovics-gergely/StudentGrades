@@ -1,0 +1,78 @@
+﻿@model IEnumerable<StudentGrades.BLL.DTOs.StudentStatistic>
+
+@{ ViewBag.Title = "Student statistics";
+    Layout = "_Layout"; }
+
+<h2 class="mb-3">@ViewBag.Title</h2>
+
+@if (User.Identity.Name != null)
+{
+    <button class="btn btn-secondary" onclick="location.href='@Url.Action("Create", "Students")'">Add new Student</button>
+    <button class="btn btn-secondary" onclick="location.href='@Url.Action("CreateGrade", "Students")'">Add new Grade</button>
+}
+
+<hr />
+@if (Model.Any())
+{
+    <div class="row">
+        @foreach (var student in Model)
+        {
+            <div class="col mb-4 col-12">
+                <div class="card bg-secondary">
+                    <div class="card-body">
+                        <h5 class="card-title text-center text-white">@Html.DisplayFor(model => student.Name)</h5>
+                        <div class="row">
+                            <div class="col col-md-4 col-12 mb-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="card-text">@Html.DisplayNameFor(model => model.AverageMarks)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-md-8 col-12 mb-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="card-text">@Html.DisplayFor(model => student.AverageMarks)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-md-4 col-12 mb-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="card-text">@Html.DisplayNameFor(model => model.BestMark)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-md-8 col-12 mb-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="card-text">@Html.DisplayFor(model => student.BestMark)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-md-4 col-12 mb-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="card-text">@Html.DisplayNameFor(model => model.BlackMarkCount)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-md-8 col-12 mb-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="card-text">@Html.DisplayFor(model => student.BlackMarkCount)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>}
+    </div> }
+else
+{
+    <p>No students found.</p>}

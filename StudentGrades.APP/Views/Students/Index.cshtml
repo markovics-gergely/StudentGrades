@@ -1,0 +1,88 @@
+﻿@model IEnumerable<StudentGrades.BLL.DTOs.Student>
+
+@{ ViewBag.Title = "Students";
+    Layout = "_Layout"; }
+
+<h2 class="mb-3">@ViewBag.Title</h2>
+
+@if (User.Identity.Name != null)
+{
+    <button class="btn btn-secondary" onclick="location.href='@Url.Action("Create", "Students")'">Add new Student</button>
+    <button class="btn btn-secondary" onclick="location.href='@Url.Action("CreateGrade", "Students")'">Add new Grade</button>
+}
+
+<hr />
+@if (Model.Any())
+{
+    <div class="row">
+        @foreach (var student in Model)
+        {
+            <div class="col mb-4 col-12">
+                <div class="card bg-secondary">
+                    <div class="card-body">
+                        <h5 class="card-title text-center text-white">@Html.DisplayFor(model => student.Name)</h5>
+                        <div class="row">
+                            <div class="col col-md-4 col-12 mb-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="card-text">@Html.DisplayNameFor(model => model.Year)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-md-8 col-12 mb-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="card-text">@Html.DisplayFor(model => student.Year). year</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-md-4 col-12 mb-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="card-text">@Html.DisplayNameFor(model => model.BirthDate)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-md-8 col-12 mb-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="card-text">@Html.DisplayFor(model => student.BirthDate)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-md-4 col-12 mb-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="card-text">@Html.DisplayNameFor(model => model.PhoneNumber)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-md-8 col-12 mb-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="card-text">@Html.DisplayFor(model => student.PhoneNumber)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Grades
+                            </button>
+                            <div class="dropdown-menu">
+                                @foreach (var grade in student.Grades)
+                                {
+                                    <div class="dropdown-item disabled">@Html.DisplayFor(model => grade.Value)</div>}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>}
+    </div> }
+else
+{
+    <p>No students found.</p>}
